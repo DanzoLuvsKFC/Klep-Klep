@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -22,7 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range (0, 200)] private float mouseSensitivity;
     private Transform cam;
     private float upperLimit = -75;
-    private float lowerLimit = 60f;
+    private float lowerLimit = 70f;
 
     void Start()
     {
@@ -72,6 +70,8 @@ public class PlayerController : MonoBehaviour
 
     private void LookAround()
     {
+        if (!_hasAnimator) return;
+        if (!PlayerInteract.canLook) return;
         var mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.smoothDeltaTime;
         var mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.smoothDeltaTime;
 
