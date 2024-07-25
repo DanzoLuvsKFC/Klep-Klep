@@ -9,13 +9,19 @@ public class SlidingDoor : InteractableInterface
     [SerializeField, Range(0, 009f)] private float minMove, maxMove;
     [SerializeField, Range(0, 20)] private float lerpTime;
 
+    [SerializeField] private bool _iHighLight;
+
     protected override void Interact()
     {
         var mouseX = CheckPlayerSide.pos;
         currentPosition = (mouseX * moveSpeed) + currentPosition;
 
-        currentPosition = Mathf.Clamp(currentPosition, minMove, maxMove);
-        
+        currentPosition = Mathf.Clamp(currentPosition, minMove, maxMove);        
+    }
+
+    protected override void IHighlight()
+    {
+
     }
 
     private void Update()

@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class BinLid : InteractableInterface
 {
-    private HingeJoint binJoint;
+    [SerializeField] private bool _iHighLight;
+
     private Transform lid;
     [SerializeField, Range(0, 10)] private float rotationSpeed = 3f;
     [SerializeField] private float currentAngle = 0;
@@ -17,8 +18,8 @@ public class BinLid : InteractableInterface
     private void Start()
     {
         lid = transform.parent;
-        binJoint = GetComponent<HingeJoint>();
     }
+
     protected override void Interact()
     {
         isInteracting = true;
@@ -31,9 +32,13 @@ public class BinLid : InteractableInterface
         currentAngle = newAngle;
     }
 
-    private void Update()
+    protected override void IHighlight()
     {
 
+    }
+
+    private void Update()
+    {
         if (!isInteracting && currentAngle!= 0)
         {
             LidFreefall();
