@@ -48,6 +48,9 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private Sprite _closedHand;
     private CanvasGroup _canvasGroup;
 
+    //ui object actions info
+    private GameObject interactableTypeUI;
+
     void Start()
     {
         raySource = Camera.main.transform;
@@ -68,6 +71,11 @@ public class PlayerInteract : MonoBehaviour
     private void ManageBooleans()
     {
         canLook = Input.GetKey(KeyCode.R) ? false : true;
+        if (interactableTypeUI != null)
+        {
+            interactableTypeUI.SetActive(canInteract ? true : false);
+        }
+
         if (Input.GetMouseButtonUp(0))
         {
             isHeld = false;
@@ -137,6 +145,7 @@ public class PlayerInteract : MonoBehaviour
                 if (hit.collider.TryGetComponent(out InteractableInterface interactable))
                 {
                     interactableInterface = interactable;
+                    interactableTypeUI = interactable._typeUI;
                     canInteract = true;
                 }
 
